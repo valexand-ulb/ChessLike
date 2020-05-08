@@ -1,0 +1,223 @@
+from Army import Army
+from os import name, system
+
+
+class Playgroup:
+    def __init__(self, mat):
+        self.nplayers = int(input('Number of players (2-4) : '))
+
+        if self.nplayers == 2:
+            self.p1 = Player(mat, 1, 'ul', 'red')
+            self.p2 = Player(mat, 2, 'dr', 'blue')
+            mat.printM()
+        elif self.nplayers == 3:
+            self.p1 = Player(mat, 1, 'ul', 'red')
+            self.p2 = Player(mat, 2, 'ur', 'green')
+            self.p3 = Player(mat, 3, 'dr', 'blue')
+            mat.printM()
+
+        elif self.nplayers == 4:
+            self.p1 = Player(mat, 1, 'ul', 'red')
+            self.p2 = Player(mat, 2, 'ur', 'green')
+            self.p3 = Player(mat, 3, 'dr', 'blue')
+            self.p4 = Player(mat, 4, 'dl', 'yellow')
+            mat.printM()
+
+
+class Player:
+    def __init__(self, mat, index, corner, color):
+        self.index = index
+        self.corner = corner
+        self.color = color
+
+        matsize = mat.getSize()
+
+        if self.corner == 'ul':
+            self.army = Army(mat, matsize, 'ul', self.color)
+        elif self.corner == 'ur':
+            self.army = Army(mat, matsize, 'ur', self.color)
+        elif self.corner == 'dl':
+            self.army = Army(mat, matsize, 'dl', self.color)
+        elif self.corner == 'dr':
+            self.army = Army(mat, matsize, 'dr', self.color)
+
+    def ask(self, mat):
+        fini = False
+        detail = 'HELP : \n------- \nKing : K \nGuardian (1-2) : G \nKnight (1-3) : Kn \n'
+        detail2 = 'Forward : F \nBackward : B \nLeft : L \nRight : R \nDiag up/down/left/right : D + U/D + L/R\n'
+        detail3 = 'e.g: Kn3 F ; K DUR'
+
+        while not fini:
+            ask = input(('J' + str(self.index) + ': Quel pion jouer ? (for help input H) :'))
+
+            if ask == 'H':
+
+                if name == 'posix':
+                    system('clear')
+                elif name == 'nt':
+                    system('cls')
+
+                print(detail)
+                print(detail2)
+                print(detail3)
+
+                ask2 = input('Press any Key to continue : ')
+                print('')
+
+                if name == 'posix':
+                    system('clear')
+                elif name == 'nt':
+                    system('cls')
+
+                mat.printM()
+
+            elif ask == 'pass':
+                fini = True
+
+            else:
+                if 2 < len(ask) < 6:
+                    lres = ask.split(' ')
+                    piece = lres[0]
+                    mov = lres[1]
+
+                    if len(piece) == 1 and piece == 'K':  # king
+                        if mov == 'F':
+                            if self.army.king.MovFw(mat):
+                                fini = True
+
+                        elif mov == 'B':
+                            if self.army.king.MovBw(mat):
+                                fini = True
+
+                        elif mov == 'L':
+                            if self.army.king.MovLft(mat):
+                                fini = True
+
+                        elif mov == 'R':
+                            if self.army.king.MovRgt(mat):
+                                fini = True
+
+                        elif mov == 'DUL':
+                            if self.army.king.MovDUL(mat):
+                                fini = True
+
+                        elif mov == 'DUR':
+                            if self.army.king.MovDUR(mat):
+                                fini = True
+
+                        elif mov == 'DDL':
+                            if self.army.king.MovDDL(mat):
+                                fini = True
+
+                        elif mov == 'DDR':
+                            if self.army.king.MovDDR(mat):
+                                fini = True
+
+                        else:
+                            print('Movement ' + mov + ' non reconnu...')
+
+                    elif len(piece) == 2 and piece[0] == 'G':  # guard
+                        if mov == 'F':
+                            if piece[-1] == '1':
+                                if self.army.guard1.MovFw(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.guard2.MovFw(mat):
+                                    fini = True
+                            else:
+                                print('Guardian ' + piece[-1] + " n'existe pas ...")
+
+                        elif mov == 'B':
+                            if piece[-1] == '1':
+                                if self.army.guard1.MovBw(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.guard2.MovBw(mat):
+                                    fini = True
+                            else:
+                                print('Guardian ' + piece[-1] + " n'existe pas ...")
+
+                        elif mov == 'L':
+                            if piece[-1] == '1':
+                                if self.army.guard1.MovLft(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.guard2.MovLft(mat):
+                                    fini = True
+                            else:
+                                print('Guardian ' + piece[-1] + " n'existe pas ...")
+
+                        elif mov == 'R':
+                            if piece[-1] == '1':
+                                if self.army.guard1.MovRgt(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.guard2.MovRgt(mat):
+                                    fini = True
+                            else:
+                                print('Guardian ' + piece[-1] + " n'existe pas ...")
+                        else:
+                            print('Movement ' + mov + ' non reconnu...')
+
+                    elif len(piece) == 3 and piece[0:2] == 'Kn':  # knight
+                        if mov == 'F':
+                            if piece[-1] == '1':
+                                if self.army.knight1.MovFw(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.knight2.MovFw(mat):
+                                    fini = True
+                            elif piece[-1] == '3':
+                                if self.army.knight3.MovFw(mat):
+                                    fini = True
+                            else:
+                                print('Knight ' + piece[-1] + " n'existe pas ...")
+
+                        elif mov == 'B':
+                            if piece[-1] == '1':
+                                if self.army.knight1.MovBw(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.knight2.MovBw(mat):
+                                    fini = True
+                            elif piece[-1] == '3':
+                                if self.army.knight3.MovBw(mat):
+                                    fini = True
+                            else:
+                                print('Knight ' + piece[-1] + " n'existe pas ...")
+
+                        elif mov == 'L':
+                            if piece[-1] == '1':
+                                if self.army.knight1.MovLft(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.knight2.MovLft(mat):
+                                    fini = True
+                            elif piece[-1] == '3':
+                                if self.army.knight3.MovLft(mat):
+                                    fini = True
+                            else:
+                                print('Knight ' + piece[-1] + " n'existe pas ...")
+
+                        elif mov == 'R':
+                            if piece[-1] == '1':
+                                if self.army.knight1.MovRgt(mat):
+                                    fini = True
+                            elif piece[-1] == '2':
+                                if self.army.knight2.MovRgt(mat):
+                                    fini = True
+                            elif piece[-1] == '3':
+                                if self.army.knight3.MovRgt(mat):
+                                    fini = True
+                            else:
+                                print('Knight ' + piece[-1] + " n'existe pas ...")
+
+                        else:
+                            print('Movement ' + mov + ' non reconnu...')
+
+                    else:
+                        print('Piece ' + piece + ' non reconnue...')
+                else:
+                    print('Formme non valide')
+
+        mat.printM()
