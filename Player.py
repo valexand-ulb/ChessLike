@@ -43,9 +43,10 @@ class Player:
 
     def ask(self, mat):
         fini = False
-        detail = 'HELP : \n------- \nKing : K \nGuardian (1-2) : G \nKnight (1-3) : Kn \n'
-        detail2 = 'Forward : F \nBackward : B \nLeft : L \nRight : R \nDiag up/down/left/right : D + U/D + L/R\n'
-        detail3 = 'e.g: Kn3 F ; K DUR'
+        det = 'HELP : \n------- \n1) Pieces: \n King : K \n Guardian (1-2) : G \n Knight (1-3) : Kn \n'
+        det2 = '2) Moves: \n Forward : F \n Backward : B \n Left : L ' + \
+               '\n Right : R \n Diag up/down/left/right : D + U/D + L/R\n'
+        det3 = 'e.g: Kn3 F = third knight forward\n     K DUR = king diagonal up right\n     G1 L = first guardian left'
 
         while not fini:
             ask = input(('J' + str(self.index) + ': Quel pion jouer ? (for help input H) :'))
@@ -57,12 +58,12 @@ class Player:
                 elif name == 'nt':
                     system('cls')
 
-                print(detail)
-                print(detail2)
-                print(detail3)
-
-                ask2 = input('Press any Key to continue : ')
+                print(det)
+                print(det2)
+                print(det3)
                 print('')
+                ask2 = input('Press any Key to continue : ')
+
 
                 if name == 'posix':
                     system('clear')
