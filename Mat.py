@@ -30,11 +30,10 @@ class Mat:
                 else:
                     s += ' ' + str(l[p]) + ' '
             s += '\n\n\n'
+
         if name == 'posix':
             system('clear')
         elif name == 'nt':
             system('cls')
 
         print(s)
-
-

@@ -1,5 +1,6 @@
 from Army import Army
 from os import name, system
+from sys import exit
 
 
 class Playgroup:
@@ -24,7 +25,7 @@ class Playgroup:
             mat.printM()
 
 
-class Player:
+class Player(Army):
     def __init__(self, mat, index, corner, color):
         self.index = index
         self.corner = corner
@@ -75,6 +76,9 @@ class Player:
             elif ask == 'pass':
                 fini = True
 
+            elif ask == 'exit':
+                exit()
+                fini = True
             else:
                 if 2 < len(ask) < 6:
                     lres = ask.split(' ')

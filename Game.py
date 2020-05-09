@@ -1,19 +1,56 @@
-from time import sleep
+from sys import exit
 from Mat import Mat
 from Player import Playgroup
 
 
-def round_by_roun(m):
-    gagnant = False
-    while not gagnant:
-        pg.p1.ask(m)
-        pg.p2.ask(m)
-        pg.p3.ask(m) if pg.nplayers >= 3 else None
-        pg.p4.ask(m) if pg.nplayers == 4 else None
+class ChessLike:
+    def __init__(self):
+        self.m = Mat(int(input('Taille du plateau (conseillé min 11) : ')))
+        self.pg = Playgroup(self.m)
+
+        self.round_by_roun(self.m)
+
+    def round_by_roun(self, m):
+        gagnant = False
+        while not gagnant:
+            self.pg.p1.ask(m) if gagnant is False else None
+            gagnant = True if self.winner(m) else False
+
+            self.pg.p2.ask(m) if gagnant is False else None
+            gagnant = True if self.winner(m) else False
+
+            self.pg.p3.ask(m) if self.pg.nplayers >= 3 and gagnant is False else None
+            gagnant = True if self.winner(m) else False
+
+            self.pg.p4.ask(m) if self.pg.nplayers == 4 and gagnant is False else None
+            gagnant = True if self.winner(m) else False
+
+    def winner(self, m):
+        size = m.getSize()
+        res = False
+        if m.mat[size//2][size//2] != 9 :
+            if m.mat[size//2][size//2][0] == 3:
+                if m.mat[size//2][size//2][1] == 'red':
+                    print('Joueur rouge Gagnant')
+                    res = True
+                    exit()
+                elif m.mat[size//2][size//2][1] == 'green':
+                    print('Joueur vert Gagnant')
+                    res = True
+                    exit()
+                elif m.mat[size//2][size//2][1] == 'blue':
+                    print('Joueur bleu Gagnant')
+                    res = True
+                    exit()
+                elif m.mat[size // 2][size // 2][1] == 'yellow':
+                    print('Joueur jaune Gagnant')
+                    res = True
+                    exit()
+
+        return res
 
 
-m = Mat(int(input('Taille du plateau (conseillé min 11) : ')))
-pg = Playgroup(m)
-round_by_roun(m)
+if __name__ == '__main__':
+    g = ChessLike()
 
 
