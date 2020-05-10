@@ -1,55 +1,58 @@
 
 
 class Army:
-    def __init__(self, mat, matsize, corner, color):
+    def __init__(self, mat, matsize, corner, color, parent):
 
         self.corner = corner
         self.color = color
         self.size = matsize
 
+        self.parent = parent
+
         if self.corner == 'ul':
-            self.king = King(mat, 0, 0, 1, 'ul', self.color)
+            self.king = King(mat, 0, 0, 1, 'ul', self.color, self)
 
-            self.guard1 = Guardian(mat, 1, 0, 1, 'ul', self.color)
-            self.guard2 = Guardian(mat, 0, 1, 2, 'ul', self.color)
+            self.guard1 = Guardian(mat, 1, 0, 1, 'ul', self.color, self)
+            self.guard2 = Guardian(mat, 0, 1, 2, 'ul', self.color, self)
 
-            self.knight1 = Knight(mat, 2, 0, 1, 'ul', self.color)
-            self.knight2 = Knight(mat, 1, 1, 2, 'ul', self.color)
-            self.knight3 = Knight(mat, 0, 2, 3, 'ul', self.color)
+            self.knight1 = Knight(mat, 2, 0, 1, 'ul', self.color, self)
+            self.knight2 = Knight(mat, 1, 1, 2, 'ul', self.color, self)
+            self.knight3 = Knight(mat, 0, 2, 3, 'ul', self.color, self)
 
         elif self.corner == 'ur':
-            self.king = King(mat, self.size - 1, 0, 1, 'ur', self.color)
+            self.king = King(mat, self.size - 1, 0, 1, 'ur', self.color, self)
 
-            self.guard1 = Guardian(mat, self.size - 2, 0, 1, 'ur', self.color)
-            self.guard2 = Guardian(mat, self.size - 1, 1, 2, 'ur', self.color)
+            self.guard1 = Guardian(mat, self.size - 2, 0, 1, 'ur', self.color, self)
+            self.guard2 = Guardian(mat, self.size - 1, 1, 2, 'ur', self.color, self)
 
-            self.knight1 = Knight(mat, self.size - 3, 0, 1, 'ur', self.color)
-            self.knight2 = Knight(mat, self.size - 2, 1, 2, 'ur', self.color)
-            self.knight3 = Knight(mat, self.size - 1, 2, 3, 'ur', self.color)
+            self.knight1 = Knight(mat, self.size - 3, 0, 1, 'ur', self.color, self)
+            self.knight2 = Knight(mat, self.size - 2, 1, 2, 'ur', self.color, self)
+            self.knight3 = Knight(mat, self.size - 1, 2, 3, 'ur', self.color, self)
 
         elif self.corner == 'dl':
-            self.king = King(mat, 0, self.size - 1, 1, 'dl', self.color)
+            self.king = King(mat, 0, self.size - 1, 1, 'dl', self.color, self)
 
-            self.guard1 = Guardian(mat, 0, self.size - 2, 1, 'dl', self.color)
-            self.guard2 = Guardian(mat, 1, self.size - 1, 2, 'dl', self.color)
+            self.guard1 = Guardian(mat, 0, self.size - 2, 1, 'dl', self.color, self)
+            self.guard2 = Guardian(mat, 1, self.size - 1, 2, 'dl', self.color, self)
 
-            self.knight1 = Knight(mat, 0, self.size - 3, 1, 'dl', self.color)
-            self.knight2 = Knight(mat, 1, self.size - 2, 2, 'dl', self.color)
-            self.knight3 = Knight(mat, 2, self.size - 1, 3, 'dl', self.color)
+            self.knight1 = Knight(mat, 0, self.size - 3, 1, 'dl', self.color, self)
+            self.knight2 = Knight(mat, 1, self.size - 2, 2, 'dl', self.color, self)
+            self.knight3 = Knight(mat, 2, self.size - 1, 3, 'dl', self.color, self)
 
         elif self.corner == 'dr':
-            self.king = King(mat, self.size - 1, self.size - 1, 1, 'dr', self.color)
+            self.king = King(mat, self.size - 1, self.size - 1, 1, 'dr', self.color, self)
 
-            self.guard1 = Guardian(mat, self.size - 1, self.size - 2, 1, 'dr', self.color)
-            self.guard2 = Guardian(mat, self.size - 2, self.size - 1, 2, 'dr', self.color)
+            self.guard1 = Guardian(mat, self.size - 1, self.size - 2, 1, 'dr', self.color, self)
+            self.guard2 = Guardian(mat, self.size - 2, self.size - 1, 2, 'dr', self.color, self)
 
-            self.knight1 = Knight(mat, self.size - 1, self.size - 3, 1, 'dr', self.color)
-            self.knight2 = Knight(mat, self.size - 2, self.size - 2, 2, 'dr', self.color)
-            self.knight3 = Knight(mat, self.size - 3, self.size - 1, 3, 'dr', self.color)
+            self.knight1 = Knight(mat, self.size - 1, self.size - 3, 1, 'dr', self.color, self)
+            self.knight2 = Knight(mat, self.size - 2, self.size - 2, 2, 'dr', self.color, self)
+            self.knight3 = Knight(mat, self.size - 3, self.size - 1, 3, 'dr', self.color, self)
 
 
-class Knight(Army):
-    def __init__(self, mat, init_posx, init_posy, index, corner, color):
+class Knight:
+
+    def __init__(self, mat, init_posx, init_posy, index, corner, color, parent):
         self.color = color
         self.posX = init_posx
         self.posY = init_posy
@@ -59,6 +62,9 @@ class Knight(Army):
         self.corner = corner
         self.index = index
         self.setpos(self.posX, self.posY, mat, self.color)
+
+        self.parent = parent
+        self.alive = True
 
     def MovFw(self, mat):
         self.rempos(self.posX, self.posY, mat)
@@ -135,12 +141,6 @@ class Knight(Army):
         else:
             self.setpos(self.lastpos[0], self.lastpos[1], mat, self.color)
             return False
-
-    def kill(self):
-        if self.live > 0:
-            self.live -= 1
-            self.posX = (self.init_pos[0])
-            self.posY = (self.init_pos[1])
 
     def rempos(self, xpos, ypos, mat):
         mat.mat[ypos][xpos] = 0
@@ -163,54 +163,84 @@ class Knight(Army):
             piece = mat.mat[ypos][xpos][0]
             color = mat.mat[ypos][xpos][1]
             index = mat.mat[ypos][xpos][2]
+            self.kill(piece, color, index, mat, xpos, ypos)
 
-            """
-            if piece == 1:
-                if color == 'red':
-                    if index == 1:
-                        pass
-                    elif index == 2:
-                        pass
-                    else:
-                        pass
-                elif color == 'green':
-                    if color == 'red':
-                        if index == 1:
-                            pass
-                        elif index == 2:
-                            pass
-                        else:
-                            pass
-                elif color == 'blue':
-                    if color == 'red':
-                        if index == 1:
-                            pass
-                        elif index == 2:
-                            pass
-                        else:
-                            pass
-                else:
-                    if color == 'red':
-                        if index == 1:
-                            pass
-                        elif index == 2:
-                            pass
-                        else:
-                            pass
-            elif piece == 2:
-                pass
-            else:
-                pass
-            """
         return res
 
-    def killpiece(self, mat, xpos, ypos):
-        pass
+    def kill(self, piece, color, index, mat, xpos, ypos):
+
+        if piece == 1:      # knight
+            if color == 'red':
+                if index == 1:
+                    self.parent.parent.parent.p1.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p1.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p1.army.knight3.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                if index == 1:
+                    self.parent.parent.parent.p2.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p2.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p2.army.knight3.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                if index == 1:
+                    self.parent.parent.parent.p3.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p3.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p3.army.knight3.killpiece(mat, xpos, ypos)
+            else:
+                if index == 1:
+                    self.parent.parent.parent.p4.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p4.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p4.army.knight3.killpiece(mat, xpos, ypos)
+        elif piece == 2:    # guard
+            if color == 'red':
+                if index == 1:
+                    self.parent.parent.parent.p1.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p1.army.guard2.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                if index == 1:
+                    self.parent.parent.parent.p2.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p2.army.guard2.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                if index == 1:
+                    self.parent.parent.parent.p3.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p3.army.guard2.killpiece(mat, xpos, ypos)
+            else:
+                if index == 1:
+                    self.parent.parent.parent.p4.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p4.army.guard2.killpiece(mat, xpos, ypos)
+        else:               # king
+            if color == 'red':
+                self.parent.parent.parent.p1.army.king.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                self.parent.parent.parent.p2.army.king.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                self.parent.parent.parent.p3.army.king.killpiece(mat, xpos, ypos)
+            else:
+                self.parent.parent.parent.p4.army.king.killpiece(mat, xpos, ypos)
+
+    def killpiece(self, mat,  xpos, ypos):
+        self.alive = False
+        self.posX = xpos
+        self.posY = ypos
+        mat.mat[ypos][xpos] = 0
+
+    def isAlive(self):
+        return self.alive
 
 
-
-class Guardian(Army):
-    def __init__(self, mat, init_posx, init_posy, index, corner, color):
+class Guardian:
+    def __init__(self, mat, init_posx, init_posy, index, corner, color, parent):
         self.color = color
         self.posX = init_posx
         self.posY = init_posy
@@ -220,7 +250,11 @@ class Guardian(Army):
         self.corner = corner
         self.index = index
 
+        self.parent = parent
+        self.alive = True
+
         self.setpos(self.posX, self.posY, mat, self.color)
+
     def MovFw(self, mat):
         self.rempos(self.posX, self.posY, mat)
         if self.corner == 'ul':
@@ -309,12 +343,6 @@ class Guardian(Army):
             self.setpos(self.lastpos[0], self.lastpos[1], mat, self.color)
             return False
 
-    def kill(self):
-        if self.live > 0:
-            self.live -= 1
-            self.posX = (self.init_pos[0])
-            self.posY = (self.init_pos[1])
-
     def rempos(self, xpos, ypos, mat):
         mat.mat[ypos][xpos] = 0
         self.lastpos = (xpos, ypos)
@@ -333,9 +361,80 @@ class Guardian(Army):
             res = True
         return res
 
+    def kill(self, piece, color, index, mat, xpos, ypos):
 
-class King(Army):
-    def __init__(self, mat, init_posx, init_posy, index, corner, color):
+        if piece == 1:      # knight
+            if color == 'red':
+                if index == 1:
+                    self.parent.parent.parent.p1.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p1.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p1.army.knight3.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                if index == 1:
+                    self.parent.parent.parent.p2.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p2.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p2.army.knight3.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                if index == 1:
+                    self.parent.parent.parent.p3.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p3.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p3.army.knight3.killpiece(mat, xpos, ypos)
+            else:
+                if index == 1:
+                    self.parent.parent.parent.p4.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p4.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p4.army.knight3.killpiece(mat, xpos, ypos)
+        elif piece == 2:    # guard
+            if color == 'red':
+                if index == 1:
+                    self.parent.parent.parent.p1.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p1.army.guard2.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                if index == 1:
+                    self.parent.parent.parent.p2.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p2.army.guard2.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                if index == 1:
+                    self.parent.parent.parent.p3.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p3.army.guard2.killpiece(mat, xpos, ypos)
+            else:
+                if index == 1:
+                    self.parent.parent.parent.p4.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p4.army.guard2.killpiece(mat, xpos, ypos)
+        else:               # king
+            if color == 'red':
+                self.parent.parent.parent.p1.army.king.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                self.parent.parent.parent.p2.army.king.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                self.parent.parent.parent.p3.army.king.killpiece(mat, xpos, ypos)
+            else:
+                self.parent.parent.parent.p4.army.king.killpiece(mat, xpos, ypos)
+
+    def killpiece(self, mat,  xpos, ypos):
+        self.alive = False
+        self.posX = xpos
+        self.posY = ypos
+        mat.mat[ypos][xpos] = 0
+
+    def isAlive(self):
+        return self.alive
+
+
+class King:
+    def __init__(self, mat, init_posx, init_posy, index, corner, color, parent):
         self.color = color
         self.posX = init_posx
         self.posY = init_posy
@@ -344,6 +443,9 @@ class King(Army):
 
         self.corner = corner
         self.index = index
+
+        self.alive = True
+        self.parent = parent
 
         self.setpos(self.posX, self.posY, mat, self.color)
 
@@ -531,3 +633,73 @@ class King(Army):
             res = False
         return res
 
+    def kill(self, piece, color, index, mat, xpos, ypos):
+
+        if piece == 1:      # knight
+            if color == 'red':
+                if index == 1:
+                    self.parent.parent.parent.p1.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p1.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p1.army.knight3.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                if index == 1:
+                    self.parent.parent.parent.p2.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p2.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p2.army.knight3.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                if index == 1:
+                    self.parent.parent.parent.p3.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p3.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p3.army.knight3.killpiece(mat, xpos, ypos)
+            else:
+                if index == 1:
+                    self.parent.parent.parent.p4.army.knight1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p4.army.knight2.killpiece(mat, xpos, ypos)
+                else:
+                    self.parent.parent.parent.p4.army.knight3.killpiece(mat, xpos, ypos)
+        elif piece == 2:    # guard
+            if color == 'red':
+                if index == 1:
+                    self.parent.parent.parent.p1.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p1.army.guard2.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                if index == 1:
+                    self.parent.parent.parent.p2.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p2.army.guard2.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                if index == 1:
+                    self.parent.parent.parent.p3.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p3.army.guard2.killpiece(mat, xpos, ypos)
+            else:
+                if index == 1:
+                    self.parent.parent.parent.p4.army.guard1.killpiece(mat, xpos, ypos)
+                elif index == 2:
+                    self.parent.parent.parent.p4.army.guard2.killpiece(mat, xpos, ypos)
+        else:               # king
+            if color == 'red':
+                self.parent.parent.parent.p1.army.king.killpiece(mat, xpos, ypos)
+            elif color == 'green':
+                self.parent.parent.parent.p2.army.king.killpiece(mat, xpos, ypos)
+            elif color == 'blue':
+                self.parent.parent.parent.p3.army.king.killpiece(mat, xpos, ypos)
+            else:
+                self.parent.parent.parent.p4.army.king.killpiece(mat, xpos, ypos)
+
+    def killpiece(self, mat,  xpos, ypos):
+        self.alive = False
+        self.posX = xpos
+        self.posY = ypos
+        mat.mat[ypos][xpos] = 0
+
+    def isAlive(self):
+        return self.alive

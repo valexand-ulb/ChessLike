@@ -16,10 +16,10 @@ class ChessLike:
             self.pg.p1.ask(m) if gagnant is False else None
             gagnant = True if self.winner(m) else False
 
-            self.pg.p2.ask(m) if gagnant is False else None
+            self.pg.p3.ask(m) if gagnant is False else None
             gagnant = True if self.winner(m) else False
 
-            self.pg.p3.ask(m) if self.pg.nplayers >= 3 and gagnant is False else None
+            self.pg.p2.ask(m) if self.pg.nplayers >= 3 and gagnant is False else None
             gagnant = True if self.winner(m) else False
 
             self.pg.p4.ask(m) if self.pg.nplayers == 4 and gagnant is False else None
