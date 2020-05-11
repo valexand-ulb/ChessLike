@@ -152,19 +152,17 @@ class Knight:
         mat.mat[ypos][xpos] = (1, color, self.index)
 
     def verify(self, xpos, ypos, mat, color):
-        if mat.mat[ypos][xpos] == 9:
-            res = False
-        elif type(mat.mat[ypos][xpos]) == tuple and mat.mat[ypos][xpos][1] == color:
-            res = False
-        elif mat.mat[ypos][xpos] == 0:
-            res = True
-        else:
-            res = True
-            piece = mat.mat[ypos][xpos][0]
-            color = mat.mat[ypos][xpos][1]
-            index = mat.mat[ypos][xpos][2]
-            self.kill(piece, color, index, mat, xpos, ypos)
-
+        size = mat.getSize()
+        res = False
+        if 0 <= xpos < size and 0 <= ypos < size:
+            if mat.mat[ypos][xpos] == 0:
+                res = True
+            else:
+                res = True
+                piece = mat.mat[ypos][xpos][0]
+                color = mat.mat[ypos][xpos][1]
+                index = mat.mat[ypos][xpos][2]
+                self.kill(piece, color, index, mat, xpos, ypos)
         return res
 
     def kill(self, piece, color, index, mat, xpos, ypos):
@@ -353,19 +351,17 @@ class Guardian:
         mat.mat[ypos][xpos] = (2, color, self.index)
 
     def verify(self, xpos, ypos, mat, color):
-        if mat.mat[ypos][xpos] == 9:
-            res = False
-        elif type(mat.mat[ypos][xpos]) == tuple and mat.mat[ypos][xpos][1] == color:
-            res = False
-        elif mat.mat[ypos][xpos] == 0:
-            res = True
-        else:
-            res = True
-            piece = mat.mat[ypos][xpos][0]
-            color = mat.mat[ypos][xpos][1]
-            index = mat.mat[ypos][xpos][2]
-            self.kill(piece, color, index, mat, xpos, ypos)
-
+        size = mat.getSize()
+        res = False
+        if 0 <= xpos < size and 0 <= ypos < size:
+            if mat.mat[ypos][xpos] == 0:
+                res = True
+            else:
+                res = True
+                piece = mat.mat[ypos][xpos][0]
+                color = mat.mat[ypos][xpos][1]
+                index = mat.mat[ypos][xpos][2]
+                self.kill(piece, color, index, mat, xpos, ypos)
         return res
 
     def kill(self, piece, color, index, mat, xpos, ypos):
@@ -634,19 +630,19 @@ class King:
         mat.mat[ypos][xpos] = (3, color, self.index)
 
     def verify(self, xpos, ypos, mat, color):
-        if mat.mat[ypos][xpos] == 9:
-            res = False
-        elif type(mat.mat[ypos][xpos]) == tuple and mat.mat[ypos][xpos][1] == color:
-            res = False
-        elif mat.mat[ypos][xpos] == 0:
-            res = True
-        else:
-            res = True
-            piece = mat.mat[ypos][xpos][0]
-            color = mat.mat[ypos][xpos][1]
-            index = mat.mat[ypos][xpos][2]
-            self.kill(piece, color, index, mat, xpos, ypos)
-
+        size = mat.getSize()
+        res = False
+        if 0 <= xpos < size and 0 <= ypos < size:
+            if mat.mat[ypos][xpos] == 0:
+                res = True
+            elif mat.mat[ypos][xpos] == 9:
+                res = True
+            else:
+                res = True
+                piece = mat.mat[ypos][xpos][0]
+                color = mat.mat[ypos][xpos][1]
+                index = mat.mat[ypos][xpos][2]
+                self.kill(piece, color, index, mat, xpos, ypos)
         return res
 
     def kill(self, piece, color, index, mat, xpos, ypos):
