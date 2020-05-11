@@ -26,9 +26,9 @@ class Mat:
         for elem in self.mat:
             for p in elem:
                 if type(p) == tuple:
-                    s += ' ' + str(l[p[0]]) + ' '
+                    s += '   ' + str(l[p[0]]) + '   '
                 else:
-                    s += ' ' + str(l[p]) + ' '
+                    s += '   ' + str(l[p]) + '   '
             s += '\n\n\n'
         # """
         if name == 'posix':

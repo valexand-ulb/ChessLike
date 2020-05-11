@@ -16,10 +16,10 @@ class ChessLike:
             self.pg.p1.ask(m) if gagnant is False and self.pg.p1.army.king.isAlive() else None
             gagnant = True if self.winner(m) else False
 
-            self.pg.p3.ask(m) if gagnant is False and self.pg.p3.army.king.isAlive() else None
+            self.pg.p2.ask(m) if gagnant is False and self.pg.p2.army.king.isAlive() else None
             gagnant = True if self.winner(m) else False
 
-            self.pg.p2.ask(m) if self.pg.nplayers >= 3 and gagnant is False and self.pg.p2.army.king.isAlive() else None
+            self.pg.p3.ask(m) if self.pg.nplayers >= 3 and gagnant is False and self.pg.p3.army.king.isAlive() else None
             gagnant = True if self.winner(m) else False
 
             self.pg.p4.ask(m) if self.pg.nplayers > 3 and gagnant is False and self.pg.p4.army.king.isAlive() else None
@@ -29,8 +29,8 @@ class ChessLike:
         size = m.getSize()
         res = False
         kingP1 = self.pg.p1.army.king.isAlive()
-        kingP2 = self.pg.p3.army.king.isAlive()
-        kingP3 = self.pg.p2.army.king.isAlive() if self.pg.nplayers >= 3 else False
+        kingP2 = self.pg.p2.army.king.isAlive()
+        kingP3 = self.pg.p3.army.king.isAlive() if self.pg.nplayers >= 3 else False
         kingP4 = self.pg.p4.army.king.isAlive() if self.pg.nplayers > 3 else False
 
         if kingP1 and not kingP2 and not kingP3 and not kingP4:

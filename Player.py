@@ -9,7 +9,7 @@ class Playgroup:
 
         if self.nplayers == 2:
             self.p1 = Player(mat, 1, 'ul', 'red', self)
-            self.p3 = Player(mat, 2, 'dr', 'blue', self)
+            self.p2 = Player(mat, 2, 'dr', 'blue', self)
             mat.printM()
         elif self.nplayers == 3:
             self.p1 = Player(mat, 1, 'ul', 'red', self)
