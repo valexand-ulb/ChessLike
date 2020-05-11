@@ -91,34 +91,50 @@ class Player:
                         if mov == 'F':
                             if self.army.king.isAlive() and self.army.king.MovFw(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         elif mov == 'B':
                             if self.army.king.isAlive() and self.army.king.MovBw(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         elif mov == 'L':
                             if self.army.king.isAlive() and self.army.king.MovLft(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         elif mov == 'R':
                             if self.army.king.isAlive() and self.army.king.MovRgt(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         elif mov == 'DUL':
                             if self.army.king.isAlive() and self.army.king.MovDUL(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         elif mov == 'DUR':
                             if self.army.king.isAlive() and self.army.king.MovDUR(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         elif mov == 'DDL':
                             if self.army.king.isAlive() and self.army.king.MovDDL(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         elif mov == 'DDR':
                             if self.army.king.isAlive() and self.army.king.MovDDR(mat):
                                 fini = True
+                            else:
+                                print('Pièce bloquée')
 
                         else:
                             print('Movement ' + mov + ' non reconnu...')
@@ -129,12 +145,12 @@ class Player:
                                 if self.army.guard1.isAlive() and self.army.guard1.MovFw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.guard2.isAlive() and self.army.guard2.MovFw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Guardian ' + piece[-1] + " n'existe pas ...")
 
@@ -143,12 +159,12 @@ class Player:
                                 if self.army.guard1.isAlive() and self.army.guard1.MovBw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.guard2.isAlive() and self.army.guard2.MovBw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Guardian ' + piece[-1] + " n'existe pas ...")
 
@@ -157,12 +173,12 @@ class Player:
                                 if self.army.guard1.isAlive() and self.army.guard1.MovLft(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.guard2.isAlive() and self.army.guard2.MovLft(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Guardian ' + piece[-1] + " n'existe pas ...")
 
@@ -171,12 +187,12 @@ class Player:
                                 if self.army.guard1.isAlive() and self.army.guard1.MovRgt(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.guard2.isAlive() and self.army.guard2.MovRgt(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Guardian ' + piece[-1] + " n'existe pas ...")
                         else:
@@ -188,17 +204,17 @@ class Player:
                                 if self.army.knight1.isAlive() and self.army.knight1.MovFw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.knight2.isAlive() and self.army.knight2.MovFw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '3':
                                 if self.army.knight3.isAlive() and self.army.knight3.MovFw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Knight ' + piece[-1] + " n'existe pas ...")
 
@@ -207,17 +223,17 @@ class Player:
                                 if self.army.knight1.isAlive() and self.army.knight1.MovBw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.knight2.isAlive() and self.army.knight2.MovBw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '3':
                                 if self.army.knight3.isAlive() and self.army.knight3.MovBw(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Knight ' + piece[-1] + " n'existe pas ...")
 
@@ -226,17 +242,17 @@ class Player:
                                 if self.army.knight1.isAlive() and self.army.knight1.MovLft(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.knight2.isAlive() and self.army.knight2.MovLft(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '3':
                                 if self.army.knight3.isAlive() and self.army.knight3.MovLft(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Knight ' + piece[-1] + " n'existe pas ...")
 
@@ -245,17 +261,17 @@ class Player:
                                 if self.army.knight1.isAlive() and self.army.knight1.MovRgt(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '2':
                                 if self.army.knight2.isAlive() and self.army.knight2.MovRgt(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             elif piece[-1] == '3':
                                 if self.army.knight3.isAlive() and self.army.knight3.MovRgt(mat):
                                     fini = True
                                 else:
-                                    print('Pièce morte')
+                                    print('Pièce morte/ bloquée')
                             else:
                                 print('Knight ' + piece[-1] + " n'existe pas ...")
 
