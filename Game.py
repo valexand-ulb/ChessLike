@@ -22,13 +22,35 @@ class ChessLike:
             self.pg.p2.ask(m) if self.pg.nplayers >= 3 and gagnant is False else None
             gagnant = True if self.winner(m) else False
 
-            self.pg.p4.ask(m) if self.pg.nplayers == 4 and gagnant is False else None
+            self.pg.p4.ask(m) if self.pg.nplayers > 3 and gagnant is False else None
             gagnant = True if self.winner(m) else False
 
     def winner(self, m):
         size = m.getSize()
         res = False
-        if m.mat[size//2][size//2] != 9 :
+        kingP1 = self.pg.p1.army.king.isAlive()
+        kingP2 = self.pg.p3.army.king.isAlive()
+        kingP3 = self.pg.p2.army.king.isAlive() if self.pg.nplayers >= 3 else False
+        kingP4 = self.pg.p4.army.king.isAlive() if self.pg.nplayers > 3 else False
+
+        if kingP1 and not kingP2 and not kingP3 and not kingP4:
+            print('Joueur rouge Gagnant')
+            res = True
+            exit()
+        elif not kingP1 and kingP2 and not kingP3 and not kingP4:
+            print('Joueur bleu Gagnant')
+            res = True
+            exit()
+        elif not kingP1 and not kingP2 and kingP3 and not kingP4:
+            print('Joueur vert Gagnant')
+            res = True
+            exit()
+        elif not kingP1 and not kingP2 and not kingP3 and kingP4:
+            print('Joueur jaune Gagnant')
+            res = True
+            exit()
+
+        elif m.mat[size//2][size//2] != 9 :
             if m.mat[size//2][size//2][0] == 3:
                 if m.mat[size//2][size//2][1] == 'red':
                     print('Joueur rouge Gagnant')
