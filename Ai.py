@@ -1,47 +1,25 @@
 from copy import deepcopy
 from random import shuffle
 
+
 class Ai:
-    def __init__(self):
-        pass
-
-
-    """
-    def minimax(self,coup,plateau,profondeur=2,joueur):
-        if profondeur == 0 or coup est gagnant:
-            return (None, score)
-        
-        if joueur maximise:
-            meilleurcoup -= 1000
-            meilleurcoup = []
-            for coup in coup possible:
-                copie plateau
-                joue sur copie
-                score = minimax(coup, nouveau plateau, profondeur-1, False)
-                if meilleurscore < score:
-                    meilleurscore = score
-                    meilleurcoup = [(coup,score)]
-                elif meilleurscore == score:
-                    meilleurcoup.append([coup,score])
-        
+    def __init__(self, index, parent, deep=2):
+        self.index = index
+        if self.index == 1:
+            self.color = 'red'
+            self.corner = 'ul'
+        elif self.index == 2:
+            self.color = 'green'
+            self.corner = 'ur'
+        elif self.index == 3:
+            self.color = 'blue'
+            self.corner = 'dr'
         else:
-            meilleurscore = 1000
-            meilleurcoup = []
-            for coup in couppossible:
-            copie le plateau
-            joue sur copie
-            score = minimax(coup, nouveau plateau, profondeur-1, True)
-             if meilleurscore > score:
-              meilleurscore = score
-              meilleurcoup = [(coup,score)]
-            elif meilleurscore == score:
-                meilleurcoup.append([coup,score])
-                
-        shuffle(meilleurcoup)
-        return meilleurcoup[0]
-             
-            
-                    
-        
-    """
+            self.color = 'yellow'
+            self.corner = 'dl'
 
+        self.parent = parent
+        self.i = deep
+
+    def play(self, mat):
+        self.minimax(mat, self.index)

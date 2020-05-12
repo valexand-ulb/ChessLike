@@ -1,4 +1,5 @@
 from Army import Army
+from Ai import Ai
 from os import name, system
 from sys import exit
 
@@ -8,21 +9,25 @@ class Playgroup:
         self.nplayers = int(input('Number of players (2-4) : '))
 
         if self.nplayers == 2:
-            self.p1 = Player(mat, 1, 'ul', 'red', self)
-            self.p2 = Player(mat, 2, 'dr', 'blue', self)
+            self.p1 = Player(mat, 1, 'ul', 'red', self) if not self.isPlayerAi(1) else None
+            self.p2 = Player(mat, 2, 'dr', 'blue', self) if not self.isPlayerAi(2) else None
             mat.printM()
         elif self.nplayers == 3:
-            self.p1 = Player(mat, 1, 'ul', 'red', self)
-            self.p2 = Player(mat, 2, 'ur', 'green', self)
-            self.p3 = Player(mat, 3, 'dr', 'blue', self)
+            self.p1 = Player(mat, 1, 'ul', 'red', self) if not self.isPlayerAi(1) else None
+            self.p2 = Player(mat, 2, 'ur', 'green', self) if not self.isPlayerAi(2) else None
+            self.p3 = Player(mat, 3, 'dr', 'blue', self) if not self.isPlayerAi(3) else None
             mat.printM()
 
         elif self.nplayers == 4:
-            self.p1 = Player(mat, 1, 'ul', 'red', self)
-            self.p2 = Player(mat, 2, 'ur', 'green', self)
-            self.p3 = Player(mat, 3, 'dr', 'blue', self)
-            self.p4 = Player(mat, 4, 'dl', 'yellow', self)
+            self.p1 = Player(mat, 1, 'ul', 'red', self) if not self.isPlayerAi(1) else None
+            self.p2 = Player(mat, 2, 'ur', 'green', self) if not self.isPlayerAi(2) else None
+            self.p3 = Player(mat, 3, 'dr', 'blue', self) if not self.isPlayerAi(3) else None
+            self.p4 = Player(mat, 4, 'dl', 'yellow', self) if not self.isPlayerAi(4) else None
             mat.printM()
+
+    def isPlayerAi(self, index):
+        ask = input('Joueur' + str(index) + ' = IA ? (T/F) :')
+        return True if ask == 'T' else False
 
 
 class Player:
