@@ -155,7 +155,9 @@ class Knight:
         size = mat.getSize()
         res = False
         if 0 <= xpos < size and 0 <= ypos < size:
-            if mat.mat[ypos][xpos] == 0:
+            if mat.mat[ypos][xpos] == 9:
+                res = False
+            elif mat.mat[ypos][xpos] == 0:
                 res = True
             else:
                 res = True
@@ -354,7 +356,9 @@ class Guardian:
         size = mat.getSize()
         res = False
         if 0 <= xpos < size and 0 <= ypos < size:
-            if mat.mat[ypos][xpos] == 0:
+            if mat.mat[ypos][xpos] == 9:
+                res = False
+            elif mat.mat[ypos][xpos] == 0:
                 res = True
             else:
                 res = True
